@@ -34,6 +34,12 @@ class MonteCarloService:
         closed_items = pd.concat([closed_items, df[df.closed_date >= time_delta]])
         
         closed_items_hist = closed_items["closed_date"].value_counts().to_dict()
+
+        if self.save_charts:
+            tp_run_chart_path = os.path.join(self.charts_folder, 'Throughput_Run_Chart.png')
+            print("Storing Chart at {0}".format(tp_run_chart_path))
+            plt.bar(list(closed_items_hist.keys()), closed_items_hist.values(), color='b')
+            plt.savefig(tp_run_chart_path)
         
         print("Found {0} items that were closed in the last {1} days".format(len(closed_items), self.history_in_days))
                     
