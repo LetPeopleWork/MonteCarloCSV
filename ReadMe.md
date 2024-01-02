@@ -53,3 +53,4 @@ Name | Description |
 --TargetDateFormat | The format of the target date. Default is "%d.%m.%Y". Check [Python Dates](https://www.w3schools.com/python/python_datetime.asp) for the options you have (or ask ChatGPT) |
 --RemainingItems | The number of remaining items for the simulation. Default is 78. |
 --History | The number of days of history to be used for the simulation. Default is "90". |
+--SaveCharts | If specified, the charts created during the MC Simulation will be stored in a subfolder called "Charts". |
