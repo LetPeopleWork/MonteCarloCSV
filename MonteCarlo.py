@@ -5,7 +5,7 @@ from MonteCarloService import MonteCarloService
 from CsvService import CsvService
 
 parser = argparse.ArgumentParser()
-parser.add_argument("--FileName", default=".\\ExampleFile.csv")
+parser.add_argument("--FileName", default='ExampleFile.csv')
 parser.add_argument("--Delimeter", default=";")
 parser.add_argument("--ClosedDateColumn", default="Closed Date")
 parser.add_argument("--DateFormat", default="%m/%d/%Y %I:%M:%S %p")
