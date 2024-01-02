@@ -6,6 +6,7 @@ from CsvService import CsvService
 
 parser = argparse.ArgumentParser()
 parser.add_argument("--FileName", default=".\\ExampleFile.csv")
+parser.add_argument("--Delimeter", default=";")
 parser.add_argument("--ClosedDateColumn", default="Closed Date")
 parser.add_argument("--DateFormat", default="%m/%d/%Y %I:%M:%S %p")
 parser.add_argument("--TargetDate", default="08.04.2024")
@@ -16,6 +17,7 @@ parser.add_argument("--History", default="90")
 args = parser.parse_args()
 
 file_name = args.FileName
+delimeter = args.Delimeter
 closed_date_column = args.ClosedDateColumn
 date_format = args.DateFormat
 history = int(args.History)
@@ -26,7 +28,7 @@ target_date = datetime.datetime.strptime(args.TargetDate, args.TargetDateFormat)
 csv_service = CsvService()
 
 def get_closed_items_history():    
-    work_items = csv_service.get_closed_items(file_name, closed_date_column, date_format)
+    work_items = csv_service.get_closed_items(file_name, delimeter, closed_date_column, date_format)
     closed_items_history = monte_carlo_service.create_closed_items_history(work_items)
     return closed_items_history
 
@@ -35,6 +37,7 @@ print("Starting Monte Carlo Simulation...")
 print("================================================================")  
 print("Parameters:")
 print("FileName: {0}".format(args.FileName))
+print("Delimeter: {0}".format(args.Delimeter))
 print("ClosedDateColumn: {0}".format(args.ClosedDateColumn))
 print("DateFormat: {0}".format(args.DateFormat))
 print("TargetDate: {0}".format(args.TargetDate))

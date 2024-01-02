@@ -5,12 +5,12 @@ import csv
 
 class CsvService:    
        
-    def get_closed_items(self, file_path, column_name, date_format):
+    def get_closed_items(self, file_path, delimeter, column_name, date_format):
         print("Loading Items from CSV File: '{0}'. Column Name '{1}' and Date Format '{2}'".format(file_path, column_name, date_format))
         work_items = []
         
-        with open(file_path, 'r') as file:            # 
-            csv_reader = csv.DictReader(file)
+        with open(file_path, 'r') as file:
+            csv_reader = csv.DictReader(file, delimiter=delimeter)
             
             for row in csv_reader:
                 closed_date = datetime.strptime(row[column_name], date_format)           

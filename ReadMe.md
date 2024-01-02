@@ -40,6 +40,7 @@ I would recommend to change the values that don't change often (for example the 
 Name | Description |
 --- | --- |
 --FileName | The name of the csv file to be used for the simulation. Default is ".\\ExampleFile.csv". Can be a relative path (using '.') or an absolute one |
+--Delimeter | The delimeter that is used in the file specified. Default is ; |
 --ClosedDateColumn | The name of the column in the csv file that contains the closed date. Default is "Closed Date". |
 --DateFormat | The format of the date in the csv file. Default is "%m/%d/%Y %I:%M:%S %p". Check [Python Dates](https://www.w3schools.com/python/python_datetime.asp) for the options you have (or ask ChatGPT) |
 --TargetDate | The target date for the simulation. Default is "08.04.2024". It might be obvious, but that date should be in the future |
