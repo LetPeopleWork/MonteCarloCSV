@@ -142,9 +142,17 @@ class MonteCarloService:
             print("Chance of hitting target date: {0}".format(prediction_targetdate))
         
         if self.save_charts:
+            vertical_lines_data = [(percentile_50, '50th Percentile', "red"), (percentile_70, '70th Percentile', "orange"), (percentile_85, '85th Percentile', "lightgreen"), (percentile_95, '95th Percentile', "darkgreen")] 
+            plt.figure(figsize=(15, 9))
             when_chart_path = os.path.join(self.charts_folder, 'MC_When.png')
             print("Storing Chart at {0}".format(when_chart_path))
             plt.bar(list(sorted_dict.keys()), sorted_dict.values(), color='g')
+
+            for position, line_name, color in vertical_lines_data:
+                plt.axvline(x=position, color=color, linestyle='--', label="{0} ({1})".format(line_name, position))
+
+            plt.legend()
+
             plt.savefig(when_chart_path)
 
         return (predicted_date_50, predicted_date_70, predicted_date_85, predicted_date_95, prediction_targetdate)
@@ -208,9 +216,18 @@ class MonteCarloService:
         print("95 Percentile: {0} Items".format(percentile_95))
 
         if self.save_charts:
+            vertical_lines_data = [(percentile_50, '50th Percentile', "red"), (percentile_70, '70th Percentile', "orange"), (percentile_85, '85th Percentile', "lightgreen"), (percentile_95, '95th Percentile', "darkgreen")] 
+
+            plt.figure(figsize=(15, 9))
             how_many_chart_path = os.path.join(self.charts_folder, 'MC_HowMany.png')
             print("Storing Chart at {0}".format(how_many_chart_path))
             plt.bar(list(sorted_dict.keys()), sorted_dict.values(), color='g')
+            
+            for position, line_name, color in vertical_lines_data:
+                plt.axvline(x=position, color=color, linestyle='--', label="{0} ({1})".format(line_name, position))
+
+            plt.legend()
+
             plt.savefig(how_many_chart_path)
         
         return (percentile_50, percentile_70, percentile_85, percentile_95)
