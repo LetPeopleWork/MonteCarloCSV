@@ -11,7 +11,7 @@ parser.add_argument("--ClosedDateColumn", default="Closed Date")
 parser.add_argument("--DateFormat", default="%m/%d/%Y %I:%M:%S %p")
 parser.add_argument("--TargetDate", default="08.04.2024")
 parser.add_argument("--TargetDateFormat", default="%d.%m.%Y")
-parser.add_argument("--RemainingItems", default=78)
+parser.add_argument("--RemainingItems", default="78")
 parser.add_argument("--History", default="90")
 parser.add_argument("--SaveCharts", default=False, action=argparse.BooleanOptionalAction)
 
@@ -22,7 +22,7 @@ delimeter = args.Delimeter
 closed_date_column = args.ClosedDateColumn
 date_format = args.DateFormat
 history = int(args.History)
-remaining_items = args.RemainingItems
+remaining_items = int(args.RemainingItems)
 
 target_date = datetime.datetime.strptime(args.TargetDate, args.TargetDateFormat).date()
 
