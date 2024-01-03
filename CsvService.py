@@ -13,8 +13,11 @@ class CsvService:
             csv_reader = csv.DictReader(file, delimiter=delimeter)
             
             for row in csv_reader:
-                closed_date = datetime.strptime(row[column_name], date_format)           
-                work_items.append(WorkItem(closed_date))
+                closed_date_raw = row[column_name]
+
+                if closed_date_raw:
+                    closed_date = datetime.strptime(closed_date_raw, date_format)           
+                    work_items.append(WorkItem(closed_date))
         
         print("Found {0} Items in the CSV".format(len(work_items)))
 
