@@ -203,7 +203,7 @@ class MonteCarloService:
                 
                 
         print("50 Percentile: {0} Items".format(percentile_50))
-        print("70 Percentile: {0} Items".format(percentile_50))
+        print("70 Percentile: {0} Items".format(percentile_70))
         print("85 Percentile: {0} Items".format(percentile_85))
         print("95 Percentile: {0} Items".format(percentile_95))
 
