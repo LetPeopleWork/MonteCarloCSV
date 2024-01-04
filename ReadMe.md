@@ -54,3 +54,14 @@ Name | Description |
 --RemainingItems | The number of remaining items for the simulation. Default is 78. |
 --History | The number of days of history to be used for the simulation. Default is "90". |
 --SaveCharts | If specified, the charts created during the MC Simulation will be stored in a subfolder called "Charts". |
+
+# Direct Integration into Work Tracking Systems
+We want to keep this project about running MCS with a CSV input. That said, it might make a lot of sense to directly integrate with your work tracking systems without the need for a CSV export. Following is a list where this was done. You might still want to gain some experience using the CSV, but feel free to check out the other repos:
+- [Azure DevOps Integration](https://github.com/huserben/AzureDevOpsPythonScripts)
+
+# Contributions
+We're happy if you want to contribute. The following ways of contribution are possible:
+- Do you have an idea for an additional feature? Share it with us in the [Discussions](https://github.com/huserben/MonteCarloCSV/discussions)
+- Want to improve the code or extend the functionality? Feel free to create a Pull Request. However, please make sure to check first in the discussion if the feature is needed & wanted. We want to keep this generic and not make it overcomplicated, so we might intentionally leave some things out that you would get in other, full-blown SaaS tools.
+- Contribute to our [Wiki](https://github.com/huserben/MonteCarloCSV/wiki) by sharing how-to's for your work tracking system or asking (or answering) frequently asked questions.
+- If you have forked this repo and adjusted it to work directly with your work tracking system, why not keep that open-source and share it here, so we can link it.
