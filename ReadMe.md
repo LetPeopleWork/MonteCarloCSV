@@ -56,8 +56,8 @@ Name | Description |
 --SaveCharts | If specified, the charts created during the MC Simulation will be stored in a subfolder called "Charts". |
 
 # Direct Integration into Work Tracking Systems
-We want to keep this project about running MCS with a CSV input. That said, it might make a lot of sense to directly integrate with your work tracking systems without the need for a CSV export. Following is a list where this was done. You might still want to gain some experience using the CSV, but feel free to check out the other repos:
-- [Azure DevOps Integration](https://github.com/huserben/AzureDevOpsPythonScripts)
+We want to keep this project about running MCS with a CSV input. That said, it might make a lot of sense to directly integrate with your work tracking systems without the need for a CSV export. Following is a list of where this was done. You might still want to gain some experience using the CSV, but feel free to check out the other repositories:
+- [AzureDevOpsFlowScripts](https://github.com/LetPeopleWork/AzureDevOpsFlowScripts)
 
 # Contributions
 We're happy if you want to contribute. The following ways of contribution are possible:
