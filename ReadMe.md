@@ -4,6 +4,13 @@ Feel free to check out the code, propose improvements and also make it your own 
 
 If you like it and use the script, I'm happy if I can mention you/your company in the readme or for an attribution on [LinkedIn](https://www.linkedin.com/in/huserben/).
 
+## Wiki
+You might have questions on how to use this. Please ask (you can use the [Discussion](https://github.com/huserben/MonteCarloCSV/discussions) tab to ask us. However, you might want to check out the [Wiki](https://github.com/LetPeopleWork/MonteCarloCSV/wiki) first.
+There we have an [FAQ](https://github.com/LetPeopleWork/MonteCarloCSV/wiki/FAQ), so maybe your question was already answered.
+
+On top, we do have some tutorials on how to create the CSV file with different work management systems. Right now we have one for [Azure DevOps](https://github.com/LetPeopleWork/MonteCarloCSV/wiki/Azure-DevOps) and [Jira](https://github.com/LetPeopleWork/MonteCarloCSV/wiki/Jira).
+If you are using another one, we're looking for [Contributors](https://github.com/LetPeopleWork/MonteCarloCSV#contributions).
+
 ## Download Files
 In order to run the scripts, you need to download all the files in this repository. There are dependencies between the files so you cannot just download a single file. Please always use the full folder structure.
 
