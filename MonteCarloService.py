@@ -1,13 +1,17 @@
 import random
-from datetime import date, timedelta
+from datetime import date, datetime, timedelta
+
 import matplotlib.pyplot as plt
+import matplotlib.image as mpimg
+from matplotlib.offsetbox import OffsetImage, AnnotationBbox
+
 import pandas as pd
 
 import os
 
 class MonteCarloService:
     
-    def __init__(self, history_in_days, save_charts = False, trials=100000):
+    def __init__(self, history_in_days, save_charts = False, trials=10000):
         self.trials = trials        
         self.history_in_days = history_in_days
         
@@ -21,6 +25,9 @@ class MonteCarloService:
         self.charts_folder = os.path.join(script_path, 'Charts')
         self.save_charts = save_charts
 
+        self.current_date = datetime.now().strftime('%d.%m.%Y')
+        self.logo = mpimg.imread('logo.png')
+        
         if save_charts and not os.path.exists(self.charts_folder):
             os.makedirs(self.charts_folder)
         
@@ -37,8 +44,14 @@ class MonteCarloService:
 
         if self.save_charts:
             tp_run_chart_path = os.path.join(self.charts_folder, 'Throughput_Run_Chart.png')
+            plt.figure(figsize=(15, 9))
+            
             print("Storing Chart at {0}".format(tp_run_chart_path))
             plt.bar(list(closed_items_hist.keys()), closed_items_hist.values(), color='b')
+            
+            self.add_timestamp(plt)
+            self.add_logo(plt)
+            
             plt.savefig(tp_run_chart_path)
         
         print("Found {0} items that were closed in the last {1} days".format(len(closed_items), self.history_in_days))
@@ -152,6 +165,9 @@ class MonteCarloService:
                 plt.axvline(x=position, color=color, linestyle='--', label="{0} ({1})".format(line_name, position))
 
             plt.legend()
+            
+            self.add_timestamp(plt)
+            self.add_logo(plt)
 
             plt.savefig(when_chart_path)
 
@@ -227,6 +243,9 @@ class MonteCarloService:
                 plt.axvline(x=position, color=color, linestyle='--', label="{0} ({1})".format(line_name, position))
 
             plt.legend()
+            
+            self.add_timestamp(plt)
+            self.add_logo(plt)
 
             plt.savefig(how_many_chart_path)
         
@@ -244,3 +263,12 @@ class MonteCarloService:
                 
         
         return monte_carlo_data       
+    
+    def add_timestamp(self, plt):
+        plt.text(1, 1.02, f"Generated on {self.current_date}", transform=plt.gca().transAxes, fontsize=10, ha='right', va='top')
+    
+    def add_logo(self, plt):
+        # Add logo
+        imagebox = OffsetImage(self.logo, zoom=0.48)
+        ab = AnnotationBbox(imagebox, (0.065, 1.08), xycoords='axes fraction', frameon=False, box_alignment=(1, 1))
+        plt.gca().add_artist(ab)

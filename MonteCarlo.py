@@ -9,10 +9,10 @@ parser.add_argument("--FileName", default='ExampleFile.csv')
 parser.add_argument("--Delimeter", default=";")
 parser.add_argument("--ClosedDateColumn", default="Closed Date")
 parser.add_argument("--DateFormat", default="%m/%d/%Y %I:%M:%S %p")
-parser.add_argument("--TargetDate", default="08.04.2024")
+parser.add_argument("--TargetDate", default="08.08.2024")
 parser.add_argument("--TargetDateFormat", default="%d.%m.%Y")
 parser.add_argument("--RemainingItems", default="78")
-parser.add_argument("--History", default="90")
+parser.add_argument("--History", default="360")
 parser.add_argument("--SaveCharts", default=False, action=argparse.BooleanOptionalAction)
 
 args = parser.parse_args()
@@ -34,6 +34,24 @@ def get_closed_items_history():
     closed_items_history = monte_carlo_service.create_closed_items_history(work_items)
     return closed_items_history
 
+def print_logo():
+    logo = r"""
+     /$$                 /$$           /$$$$$$$                           /$$                /$$      /$$                  /$$      
+    | $$                | $$          | $$__  $$                         | $$               | $$  /$ | $$                 | $$      
+    | $$       /$$$$$$ /$$$$$$        | $$  \ $$/$$$$$$  /$$$$$$  /$$$$$$| $$ /$$$$$$       | $$ /$$$| $$ /$$$$$$  /$$$$$$| $$   /$$
+    | $$      /$$__  $|_  $$_/        | $$$$$$$/$$__  $$/$$__  $$/$$__  $| $$/$$__  $$      | $$/$$ $$ $$/$$__  $$/$$__  $| $$  /$$/
+    | $$     | $$$$$$$$ | $$          | $$____| $$$$$$$| $$  \ $| $$  \ $| $| $$$$$$$$      | $$$$_  $$$| $$  \ $| $$  \__| $$$$$$/ 
+    | $$     | $$_____/ | $$ /$$      | $$    | $$_____| $$  | $| $$  | $| $| $$_____/      | $$$/ \  $$| $$  | $| $$     | $$_  $$ 
+    | $$$$$$$|  $$$$$$$ |  $$$$/      | $$    |  $$$$$$|  $$$$$$| $$$$$$$| $|  $$$$$$$      | $$/   \  $|  $$$$$$| $$     | $$ \  $$
+    |________/\_______/  \___/        |__/     \_______/\______/| $$____/|__/\_______/      |__/     \__/\______/|__/     |__/  \__/
+                                                                | $$                                                                
+                                                                | $$                                                                
+                                                                |__/                                                                
+    """
+    print(logo)
+
+    
+
 print("================================================================")
 print("Starting Monte Carlo Simulation...")
 print("================================================================")  
@@ -45,7 +63,9 @@ print("DateFormat: {0}".format(args.DateFormat))
 print("TargetDate: {0}".format(args.TargetDate))
 print("History: {0}".format(args.History))
 print("----------------------------------------------------------------")
-   
+
+print_logo()
+
 closed_items_history = get_closed_items_history()        
 if len(closed_items_history) < 1:
     print("No closed items - skipping prediction")
@@ -84,3 +104,10 @@ if remaining_items != 0:
     print("95%: {0}".format(predictions_when_95))
     print("----------------------------------------")
     print("Chance of finishing the {0} remaining items till {1}: {2}%".format(remaining_items, target_date, predictions_targetdate_likelyhood))
+    
+    
+print()
+print()
+print()
+print("🛈 Want to learn more about how all of this works? Check out out website! 🛈")
+print("🔗 https://letpeople.work 🔗")
