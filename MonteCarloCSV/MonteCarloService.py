@@ -21,12 +21,14 @@ class MonteCarloService:
         self.percentile_95 = 0.95
 
         # Save the plot as an image in the "Charts" folder next to the script
-        script_path = os.path.dirname(os.path.abspath(__file__))
-        self.charts_folder = os.path.join(script_path, 'Charts')
+        self.charts_folder = os.path.join(os.getcwd(), 'Charts')
         self.save_charts = save_charts
 
         self.current_date = datetime.now().strftime('%d.%m.%Y')
-        self.logo = mpimg.imread('logo.png')
+        
+        script_dir = os.path.dirname(os.path.abspath(__file__))
+        logo_path = os.path.join(script_dir, "logo.png")
+        self.logo = mpimg.imread(logo_path)
         
         if save_charts and not os.path.exists(self.charts_folder):
             os.makedirs(self.charts_folder)
