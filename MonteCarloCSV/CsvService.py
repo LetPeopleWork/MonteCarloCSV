@@ -33,8 +33,8 @@ class CsvService:
             # Write Header
             writer.writerow(field)
             
-            # Generate and write 100 random dates
-            for _ in range(100):
+            # Generate random entries
+            for _ in range(30):
                 random_days_ago = random.randint(0, history)
                 random_date = datetime.now() - timedelta(days=random_days_ago)
                 formatted_date = random_date.strftime(date_format)

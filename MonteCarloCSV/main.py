@@ -1,5 +1,5 @@
 import argparse
-import datetime
+from datetime import datetime, timedelta
 import os
 
 from .MonteCarloService import MonteCarloService
@@ -11,10 +11,10 @@ def parse_arguments():
     parser.add_argument("--Delimeter", default=";")
     parser.add_argument("--ClosedDateColumn", default="Closed Date")
     parser.add_argument("--DateFormat", default="%m/%d/%Y %I:%M:%S %p")
-    parser.add_argument("--TargetDate", default="08.08.2024")
+    parser.add_argument("--TargetDate", default="")
     parser.add_argument("--TargetDateFormat", default="%d.%m.%Y")
     parser.add_argument("--RemainingItems", default="10")
-    parser.add_argument("--History", default="90")
+    parser.add_argument("--History", default="30")
     parser.add_argument("--SaveCharts", default=False, action=argparse.BooleanOptionalAction)
 
     return parser.parse_args()
@@ -58,16 +58,22 @@ def main():
         delimeter = args.Delimeter
         closed_date_column = args.ClosedDateColumn
         date_format = args.DateFormat    
+        
         remaining_items = int(args.RemainingItems)
-        target_date = datetime.datetime.strptime(args.TargetDate, args.TargetDateFormat).date()
+        
+        target_date = (datetime.now() + timedelta(days=14)).date()
+        
+        if args.TargetDate:        
+            target_date = datetime.datetime.strptime(args.TargetDate, args.TargetDateFormat).date()
     
         csv_service = CsvService()
         monte_carlo_service = MonteCarloService(history, args.SaveCharts)
+
+        print_logo()
         
         print("================================================================")
-        print("Starting Monte Carlo Simulation...")
+        print("Starting montecarlocsv with following Parameters")
         print("================================================================")  
-        print("Parameters:")
         print("FileName: {0}".format(file_name))
         print("Delimeter: {0}".format(delimeter))
         print("ClosedDateColumn: {0}".format(closed_date_column))
@@ -76,8 +82,6 @@ def main():
         print("History: {0}".format(history))        
         print("Save Charts: {0}".format(args.SaveCharts))
         print("----------------------------------------------------------------")
-
-        print_logo()
                 
         if file_name == '':
             print("No csv file specified - generating example file with random values")
@@ -98,7 +102,7 @@ def main():
 
 
         ## Run When Predictions via Monte Carlo Simulation - only possible if we have specified how many items are remaining
-        predictions_when_50 = predictions_when_70 = predictions_when_85 = predictions_when_95 = datetime.date.today()
+        predictions_when_50 = predictions_when_70 = predictions_when_85 = predictions_when_95 = datetime.today()
         predictions_targetdate_likelyhood = None
 
         if remaining_items > 0:
