@@ -64,7 +64,7 @@ def main():
         target_date = (datetime.now() + timedelta(days=14)).date()
         
         if args.TargetDate:        
-            target_date = datetime.datetime.strptime(args.TargetDate, args.TargetDateFormat).date()
+            target_date = datetime.strptime(args.TargetDate, args.TargetDateFormat).date()
     
         csv_service = CsvService()
         monte_carlo_service = MonteCarloService(history, args.SaveCharts)
