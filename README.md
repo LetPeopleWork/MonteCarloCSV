@@ -1,4 +1,7 @@
 # Monte Carlo CSV
+![CI Workflow](https://github.com/letpeoplework/montecarlocsv/actions/workflows/publish.yml/badge.svg)
+![PyPI - Downloads](https://img.shields.io/pypi/dm/montecarlocsv)
+
 This python package allows you to run a Monte Carlo Simulation (MCS) based on any csv file. It can be run offline, and all it needs is a csv file with the dates of the closure of the items. Our hope is that this will allow organizations that don't want to rely on any SaaS products or third party tools to still harness the power of MC Simulations.
 Feel free to check out the code, propose improvements and also make it your own by adjusting it to your context and potentially integrating it into some kind of pipeline of yours. The true power of MC comes when applied continuously. You can use this for free, hope it helps.
 
