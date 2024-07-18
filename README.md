@@ -15,7 +15,7 @@ On top, we do have some tutorials on how to create the CSV file with different w
 If you are using another one, we're looking for [Contributors](https://github.com/LetPeopleWork/MonteCarloCSV#contributions).
 
 ## Installation
-Make sure you have python 3.x installed on your system and it's available via your PATH variable. You can check this by running `python --version` on your terminal. If it works without error, you have python installed and ready. If not, you can download it from the [official Python Website](https://www.python.org/downloads/).
+Make sure you have python 3.9 or higher installed on your system and it's available via your PATH variable. You can check this by running `python --version` on your terminal. If it works without error, you have python installed and ready. If not, you can download it from the [official Python Website](https://www.python.org/downloads/).
 
 **Important:** It can be that you have to use `python3 --version`. If this is the case, please use always `python3` instead of `python` in the following commands.
 
