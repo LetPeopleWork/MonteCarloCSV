@@ -9,7 +9,7 @@ class CsvService:
         print("Loading Items from CSV File: '{0}'. Column Name '{1}' and Date Format '{2}'".format(file_path, column_name, date_format))
         work_items = []
         
-        with open(file_path, 'r') as file:
+        with open(file_path, 'r', encoding='utf-8-sig') as file:
             csv_reader = csv.DictReader(file, delimiter=delimeter)
             
             for row in csv_reader:
