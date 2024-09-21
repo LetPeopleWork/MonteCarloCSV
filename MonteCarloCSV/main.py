@@ -8,7 +8,8 @@ from .CsvService import CsvService
 def parse_arguments():
     parser = argparse.ArgumentParser()
     parser.add_argument("--FileName", default="")
-    parser.add_argument("--Delimeter", default=";")
+    parser.add_argument("--Delimiter", default=None)
+    parser.add_argument("--Delimeter", default=";")   # For backwards compatibility because I didn't know how to spell this :-)
     parser.add_argument("--ClosedDateColumn", default="Closed Date")
     parser.add_argument("--DateFormat", default="%m/%d/%Y %I:%M:%S %p")
     parser.add_argument("--TargetDate", default="")
@@ -19,8 +20,8 @@ def parse_arguments():
 
     return parser.parse_args()
 
-def get_closed_items_history(csv_service, monte_carlo_service, file_name, delimeter, closed_date_column, date_format):    
-    work_items = csv_service.get_closed_items(file_name, delimeter, closed_date_column, date_format)
+def get_closed_items_history(csv_service, monte_carlo_service, file_name, delimiter, closed_date_column, date_format):    
+    work_items = csv_service.get_closed_items(file_name, delimiter, closed_date_column, date_format)
     closed_items_history = monte_carlo_service.create_closed_items_history(work_items)
     return closed_items_history
 
@@ -55,7 +56,9 @@ def main():
         
         file_name = args.FileName
         history = int(args.History)
-        delimeter = args.Delimeter
+        
+        # Use the proper spelling if anything is defined. If not, we either use the old wrong spelling or we take the default (as it wasn't defined at all)
+        delimiter = args.Delimiter if args.Delimiter else args.Delimeter
         closed_date_column = args.ClosedDateColumn
         date_format = args.DateFormat    
         
@@ -75,7 +78,7 @@ def main():
         print("Starting montecarlocsv with following Parameters")
         print("================================================================")  
         print("FileName: {0}".format(file_name))
-        print("Delimeter: {0}".format(delimeter))
+        print("Delimiter: {0}".format(delimiter))
         print("ClosedDateColumn: {0}".format(closed_date_column))
         print("DateFormat: {0}".format(date_format))
         print("TargetDate: {0}".format(target_date))
@@ -87,10 +90,10 @@ def main():
             print("No csv file specified - generating example file with random values")
             file_name = os.path.join(os.getcwd(), "ExampleFile.csv")
             if not check_if_file_exists(file_name):
-                csv_service.write_example_file(file_name, delimeter, closed_date_column, history, date_format)
+                csv_service.write_example_file(file_name, delimiter, closed_date_column, history, date_format)
             
 
-        closed_items_history = get_closed_items_history(csv_service, monte_carlo_service, file_name, delimeter, closed_date_column, date_format)        
+        closed_items_history = get_closed_items_history(csv_service, monte_carlo_service, file_name, delimiter, closed_date_column, date_format)        
         if len(closed_items_history) < 1:
             print("No closed items - skipping prediction")
             exit()

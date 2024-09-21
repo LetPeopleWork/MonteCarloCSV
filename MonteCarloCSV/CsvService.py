@@ -5,12 +5,12 @@ import csv
 
 class CsvService:    
        
-    def get_closed_items(self, file_path, delimeter, column_name, date_format):
+    def get_closed_items(self, file_path, delimiter, column_name, date_format):
         print("Loading Items from CSV File: '{0}'. Column Name '{1}' and Date Format '{2}'".format(file_path, column_name, date_format))
         work_items = []
         
         with open(file_path, 'r', encoding='utf-8-sig') as file:
-            csv_reader = csv.DictReader(file, delimiter=delimeter)
+            csv_reader = csv.DictReader(file, delimiter=delimiter)
             
             for row in csv_reader:
                 closed_date_raw = row[column_name]
@@ -23,11 +23,11 @@ class CsvService:
 
         return work_items
 
-    def write_example_file(self, file_path, delimeter, column_name, history, date_format):
+    def write_example_file(self, file_path, delimiter, column_name, history, date_format):
         print("Writing Example File with random values to {0}".format(file_path))
         
         with open(file_path, 'w', newline='') as file:
-            writer = csv.writer(file, delimiter=delimeter)
+            writer = csv.writer(file, delimiter=delimiter)
             field = [column_name]
             
             # Write Header
