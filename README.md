@@ -2,28 +2,39 @@
 ![CI Workflow](https://github.com/letpeoplework/montecarlocsv/actions/workflows/publish.yml/badge.svg)
 ![PyPI - Downloads](https://img.shields.io/pypi/dm/montecarlocsv)
 
-This python package allows you to run a Monte Carlo Simulation (MCS) based on any csv file. It can be run offline, and all it needs is a csv file with the dates of the closure of the items. Our hope is that this will allow organizations that don't want to rely on any SaaS products or third party tools to still harness the power of MC Simulations.
-Feel free to check out the code, propose improvements and also make it your own by adjusting it to your context and potentially integrating it into some kind of pipeline of yours. The true power of MC comes when applied continuously. You can use this for free, hope it helps.
+## Introduction
 
-This tool is provided for free by [LetPeopleWork](https://letpeople.work). If you are curious about Flow Metrics, Kanban, #NoEstimates etc., feel free to reach out to us and book a call!
+This python package allows you to run a Monte Carlo Simulation (MCS) offline using a standard csv file as an input. Using this tool, any organisation can harness the power of MCS without relying on SaaS products or third-party tools.
 
-## Wiki
-You might have questions on how to use this. Please ask via the [Discussion](https://github.com/huserben/MonteCarloCSV/discussions) tab. However, you might want to check out the [Wiki](https://github.com/LetPeopleWork/MonteCarloCSV/wiki) first.
-There we have an [FAQ](https://github.com/LetPeopleWork/MonteCarloCSV/wiki/FAQ), so maybe your question was already answered.
+Feel free to check out the code, propose improvements and also make it your own by adjusting it to your context and potentially integrating it into your pipeline. The true power of MCS comes when applied continuously. This tool is provided for free by [LetPeopleWork](https://letpeople.work). If you are curious about Flow Metrics, Kanban, #NoEstimates etc., feel free to reach out to us and book a call! #!LINK NEEDED
 
-On top, we do have some tutorials on how to create the CSV file with different work management systems. Right now we have one for [Azure DevOps](https://github.com/LetPeopleWork/MonteCarloCSV/wiki/Azure-DevOps) and [Jira](https://github.com/LetPeopleWork/MonteCarloCSV/wiki/Jira).
-If you are using another one, we're looking for [Contributors](https://github.com/LetPeopleWork/MonteCarloCSV#contributions).
+## Getting Started
+To get started, follow the steps in **Installation** below.
+
+For more information, check out our [Wiki](https://github.com/LetPeopleWork/MonteCarloCSV/wiki) and our [FAQ](https://github.com/LetPeopleWork/MonteCarloCSV/wiki/FAQ).
+
+If you have any further questions about using this tool, feel free to ask them in the [Discussion](https://github.com/huserben/MonteCarloCSV/discussions) tab.
 
 ## Installation
-Make sure you have python 3.9 or higher installed on your system and it's available via your PATH variable. You can check this by running `python --version` on your terminal. If it works without error, you have python installed and ready. If not, you can download it from the [official Python Website](https://www.python.org/downloads/).
+In order to run this tool, you will need python v3.9 at minimum on your machine.
 
-**Important:** It can be that you have to use `python3 --version`. If this is the case, please use always `python3` instead of `python` in the following commands.
+### Installing python
+1. To download python, please visit https://www.python.org/downloads/.
+2. Install python on your machine.
+3. Add python to your `PATH` variable.
 
-Once you have made sure python is installed, you can download `montecarlocsv` via pip:
+Check if you have successfully installed python by entering `python --version` or `python3 --version` in your terminal window. If one of these commands works without error, you are ready to install MCS.
+
+### Installing MCS
+
+If you have installed python, you can download `montecarlocsv` via `pip` using the following terminal command:
+
 `python -m pip install --upgrade montecarlocsv`
 
 ## Run montecarlocsv
-If your installation was successfull, you can now run `montecarlocsv` via the commandline. When not supplied with any parameters (see below for details), it will use the default values and generate an `ExampleFile.csv` with dummy values to your current directory. Based on this, the MCS will be run and you should see the output in your commandline that looks something like this:
+To test whether your installation is successful, run `montecarlocsv` in a terminal using the command line.
+
+When `montecarlocsv` is run without any parameters, it will use preset values and generate an `ExampleFile.csv` with dummy data to your current directory. The application will use this data as an input and runs a Monte Carlo simulation with an output similar to the one below:
 
 ```
 ================================================================
@@ -81,14 +92,20 @@ Chance of finishing the 10 remaining items till 2024-06-23: 90.42%
 🛈 Want to learn more about how all of this works? Check out out website! 🛈
 🔗 https://letpeople.work 🔗
 ```
-You can now start to tweak the input parameters and replace the csv file according to your needs.
-**Note**: It's recommended to name your csv files to something more meaningful (like *TeamName.csv*) and to specify this when running the tool: `montecarlocsv --FileName "TeamName.csv"`.
 
-Read on to see details about how to configure `montecarlocsv`.
+If you can see an output like this, you are now ready to configure `montecarlocsv` and use the tool with your own data.
 
 ## "How Many" and "When"
 To run the MC Simulations with `montecarlocsv`, you need various inputs. First and foremost, you need to provide a csv file that includes the date when an item was closed. The csv can contain other information, but it's not needed nor relevant for the MC Simulation. Then we need a target date to calculate *how many* items we manage till this date based on the past throughput. We can also calculate *when* a specific amount of items will be done. If we have both a target date and the remaining items we want to achieve till this date, we can also calculate the likelihood of managing those items till the target date.
 To specify "how much history" should be used: Do you want to use the last 30 days or rather the last 90 days for your calculation?
+
+
+
+## Setting up your CSV files
+
+We created tutorials to help you create the input CSV file using [Azure DevOps](https://github.com/LetPeopleWork/MonteCarloCSV/wiki/Azure-DevOps) and [Jira](https://github.com/LetPeopleWork/MonteCarloCSV/wiki/Jira). If you are using a different work management system and have a way to export the CSV file as an input for MCS, reach out to us -- we're looking for [Contributors](https://github.com/LetPeopleWork/MonteCarloCSV#contributions).
+
+**Note**: It's recommended to name your csv files to something more meaningful (like *TeamName.csv*) and to specify this when running the tool: `montecarlocsv --FileName "TeamName.csv"`.
 
 ## Parameters
 You can specify several arguments to adjust `montecarlocsv` according to your needs. Below you find a table with the parameters, their description and the default values that are used when nothing else is supplied:
