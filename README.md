@@ -5,7 +5,7 @@
 This python package allows you to run a Monte Carlo Simulation (MCS) based on any csv file. It can be run offline, and all it needs is a csv file with the dates of the closure of the items. Our hope is that this will allow organizations that don't want to rely on any SaaS products or third party tools to still harness the power of MC Simulations.
 Feel free to check out the code, propose improvements and also make it your own by adjusting it to your context and potentially integrating it into some kind of pipeline of yours. The true power of MC comes when applied continuously. You can use this for free, hope it helps.
 
-This tool is provided for free by [LetPeopleWork](https://letpeople.work). If you are curious about Flow Metrics, Kanban, #NoEstimates etc., feel free to reach out to us and book a call!
+This tool is provided for free by [LetPeopleWork](https://letpeople.work). If you are curious about Flow Metrics, Kanban, #NoEstimates etc., feel free to reach out to us and [book a call](https://calendly.com/letpeoplework/)!
 
 ## Wiki
 You might have questions on how to use this. Please ask via the [Discussion](https://github.com/huserben/MonteCarloCSV/discussions) tab. However, you might want to check out the [Wiki](https://github.com/LetPeopleWork/MonteCarloCSV/wiki) first.
