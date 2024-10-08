@@ -6,7 +6,7 @@
 
 This python package allows you to run a Monte Carlo Simulation (MCS) offline using a standard csv file as an input. Using this tool, any organisation can harness the power of MCS without relying on SaaS products or third-party tools.
 
-Feel free to check out the code, propose improvements and also make it your own by adjusting it to your context and potentially integrating it into your pipeline. The true power of MCS comes when applied continuously. This tool is provided for free by [LetPeopleWork](https://letpeople.work). If you are curious about Flow Metrics, Kanban, #NoEstimates etc., feel free to reach out to us and book a call! #!LINK NEEDED
+Feel free to check out the code, propose improvements and also make it your own by adjusting it to your context and potentially integrating it into your pipeline. The true power of MCS comes when applied continuously. This tool is provided for free by [LetPeopleWork](https://letpeople.work). If you are curious about Flow Metrics, Kanban, #NoEstimates etc., feel free to reach out to us and [book a call](https://calendly.com/letpeoplework/)!
 
 ## Getting Started
 To get started, follow the steps in **Installation** below.
