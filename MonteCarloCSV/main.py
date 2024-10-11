@@ -15,7 +15,7 @@ def parse_arguments():
     parser.add_argument("--TargetDate", default="")
     parser.add_argument("--TargetDateFormat", default="%d.%m.%Y")
     parser.add_argument("--RemainingItems", default="10")
-    parser.add_argument("--History", default="30")
+    parser.add_argument("--History", default="360")
     parser.add_argument("--SaveCharts", default=False, action=argparse.BooleanOptionalAction)
 
     return parser.parse_args()
@@ -133,10 +133,10 @@ def main():
 
         if remaining_items != 0:
             print("When will {0} items be done:".format(remaining_items))
-            print("50%: {0}".format(predictions_when_50))
-            print("70%: {0}".format(predictions_when_70))
-            print("85%: {0}".format(predictions_when_85))
-            print("95%: {0}".format(predictions_when_95))
+            print("50%: {0}".format(predictions_when_50.strftime(args.TargetDateFormat)))
+            print("70%: {0}".format(predictions_when_70.strftime(args.TargetDateFormat)))
+            print("85%: {0}".format(predictions_when_85.strftime(args.TargetDateFormat)))
+            print("95%: {0}".format(predictions_when_95.strftime(args.TargetDateFormat)))
             print("----------------------------------------")
             print("Chance of finishing the {0} remaining items till {1}: {2}%".format(remaining_items, target_date, predictions_targetdate_likelyhood))
             
