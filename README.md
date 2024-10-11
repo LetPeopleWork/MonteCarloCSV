@@ -139,7 +139,7 @@ Name | Description | Default | Notes |
 `--Delimiter` | Delimiter used to separate values in the input `.csv` file. | `;` |
 `--ClosedDateColumn` | Name of the column in the `.csv` file containing the dates when work items were closed. | `Closed Date` |
 `--DateFormat` | Date format used for the `--ClosedDateColumn` parameter in the `.csv` file. Use [Python Dates](https://www.w3schools.com/python/python_datetime.asp) to specify the format you want to use (or ask ChatGPT). | "%m/%d/%Y %I:%M:%S %p" |
-`--History` | The number of days of history to be used for the simulation. | `30` | If this parameter isnot provided, delivery data older than 30 days will be disregarded.
+`--History` | How much "history" should be used for the simulation. Can be a fixed value to use a "rolling window" of the specified number of days. Or a date in the format "YYYY-MM-dd" (2024-08-19), then all data starting from the specified date will be included. | `30` | If this parameter isnot provided, delivery data older than 30 days will be disregarded.
 
 ### Configuring the Forecast
 

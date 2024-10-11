@@ -55,7 +55,15 @@ def main():
         args = parse_arguments()
         
         file_name = args.FileName
-        history = int(args.History)
+        
+        history = try_parse_int(args.History)
+        if history:
+            print("Use rolling history of the last {0} days".format(history))
+        else:
+            history_start = datetime.strptime(args.History, "%Y-%m-%d").date()
+            today = datetime.today().date()
+            history = (today - history_start).days
+            print("Using history with fixed start date {0} - History is {1} days".format(history_start, history))
         
         # Use the proper spelling if anything is defined. If not, we either use the old wrong spelling or we take the default (as it wasn't defined at all)
         delimiter = args.Delimiter if args.Delimiter else args.Delimeter
@@ -144,6 +152,14 @@ def main():
         print(exception)
         
         print("🪲 If the problem cannot be solved, consider opening an issue on GitHub: https://github.com/LetPeopleWork/MonteCarloCSV/issues 🪲")
+
+def try_parse_int(value):
+    try:
+        return int(value)
+    except ValueError:
+        return None
+
+
 
 if __name__ == "__main__":    
     main()
