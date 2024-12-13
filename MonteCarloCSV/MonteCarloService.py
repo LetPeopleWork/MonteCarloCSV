@@ -47,6 +47,7 @@ class MonteCarloService:
         if self.save_charts:
             tp_run_chart_path = os.path.join(self.charts_folder, 'Throughput_Run_Chart.png')
             plt.figure(figsize=(15, 9))
+            plt.gca().set_ylim(bottom=0)  
             
             print("Storing Chart at {0}".format(tp_run_chart_path))
             plt.bar(list(closed_items_hist.keys()), closed_items_hist.values(), color='b')
@@ -167,6 +168,7 @@ class MonteCarloService:
                 plt.axvline(x=position, color=color, linestyle='--', label="{0} ({1})".format(line_name, position))
 
             plt.legend()
+            plt.gca().set_ylim(bottom=0)  
             
             self.add_timestamp(plt)
             self.add_logo(plt)
