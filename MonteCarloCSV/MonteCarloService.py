@@ -11,9 +11,10 @@ import os
 
 class MonteCarloService:
     
-    def __init__(self, history_in_days, save_charts = False, trials=10000):
+    def __init__(self, history_in_days, today = date.today(), save_charts = False, trials=10000):
         self.trials = trials        
         self.history_in_days = history_in_days
+        self.today = today
         
         self.percentile_50 = 0.5
         self.percentile_70 = 0.7
@@ -35,7 +36,7 @@ class MonteCarloService:
         
     def create_closed_items_history(self, items):
         print("Getting items that were done in the last {0} days...".format(self.history_in_days))       
-        time_delta = date.today() - timedelta(self.history_in_days)
+        time_delta = self.today - timedelta(self.history_in_days)
         df = pd.DataFrame.from_records([item.to_dict() for item in items])        
         
         closed_items = pd.DataFrame()
@@ -77,14 +78,14 @@ class MonteCarloService:
         
         days_to_target_date = None
         if target_date:
-            days_to_target_date = (target_date - date.today()).days
+            days_to_target_date = (target_date - self.today).days
             print("{0} days to target date".format(days_to_target_date))
         
         (predicted_date_50, predicted_70, predicted_date_85, predicted_date_95, target_date_likelyhood) = self.__get_predictions_when(monte_carlo_simulation_results, days_to_target_date)
         return (predicted_date_50, predicted_70, predicted_date_85, predicted_date_95, target_date_likelyhood)
 
     def __run_monte_carlo_when(self, remaining_items, closed_items_history):        
-        time_delta = date.today() - timedelta(self.history_in_days)
+        time_delta = self.today - timedelta(self.history_in_days)
         monte_carlo_data = self.__prepare_monte_carlo_dataset(time_delta, closed_items_history)            
                 
         mc_results = {}
@@ -142,10 +143,10 @@ class MonteCarloService:
                 trials_in_time = count
                 
         
-        predicted_date_50 = date.today() + timedelta(percentile_50)
-        predicted_date_70 = date.today() + timedelta(percentile_70)
-        predicted_date_85 = date.today() + timedelta(percentile_85)
-        predicted_date_95 = date.today() + timedelta(percentile_95)
+        predicted_date_50 = self.today + timedelta(percentile_50)
+        predicted_date_70 = self.today + timedelta(percentile_70)
+        predicted_date_85 = self.today + timedelta(percentile_85)
+        predicted_date_95 = self.today + timedelta(percentile_95)
 
         print("50 Percentile: {0} days - Predicted Date: {1}".format(percentile_50, predicted_date_50))
         print("70 Percentile: {0} days - Predicted Date: {1}".format(percentile_70, predicted_date_70))
@@ -178,11 +179,11 @@ class MonteCarloService:
         return (predicted_date_50, predicted_date_70, predicted_date_85, predicted_date_95, prediction_targetdate)
 
     def __run_monte_carlo_how_many(self, prediction_date, closed_items_hist):
-        time_delta = date.today() - timedelta(self.history_in_days)
+        time_delta = self.today - timedelta(self.history_in_days)
         monte_carlo_data = self.__prepare_monte_carlo_dataset(time_delta, closed_items_hist)            
                 
         mc_results = {}
-        amount_of_days = (prediction_date - date.today()).days
+        amount_of_days = (prediction_date - self.today).days
                 
         for i in range(self.trials):
             day_count = 0
@@ -258,8 +259,8 @@ class MonteCarloService:
     def __prepare_monte_carlo_dataset(self, time_delta, closed_items_hist):
         monte_carlo_data = {}
         
-        for i in range((date.today() - time_delta).days):
-            day = date.today() - timedelta(days=i)
+        for i in range((self.today - time_delta).days):
+            day = self.today - timedelta(days=i)
             monte_carlo_data[i] = 0
 
             if day in closed_items_hist:

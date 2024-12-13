@@ -23,7 +23,7 @@ class CsvService:
 
         return work_items
 
-    def write_example_file(self, file_path, delimiter, column_name, history, date_format):
+    def write_example_file(self, file_path, delimiter, column_name, history, date_format, today = datetime.today().date()):
         print("Writing Example File with random values to {0}".format(file_path))
         
         with open(file_path, 'w', newline='') as file:
@@ -36,6 +36,6 @@ class CsvService:
             # Generate random entries
             for _ in range(30):
                 random_days_ago = random.randint(0, history)
-                random_date = datetime.now() - timedelta(days=random_days_ago)
+                random_date = today - timedelta(days=random_days_ago)
                 formatted_date = random_date.strftime(date_format)
                 writer.writerow([formatted_date])

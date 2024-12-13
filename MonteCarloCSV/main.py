@@ -18,7 +18,8 @@ def parse_arguments():
     parser.add_argument("--TargetDate", default="")
     parser.add_argument("--TargetDateFormat", default="%d.%m.%Y")
     parser.add_argument("--RemainingItems", default="10")
-    parser.add_argument("--History", default="360")
+    parser.add_argument("--History", default="30")
+    parser.add_argument("--Today", default=None)
     parser.add_argument("--SaveCharts", default=False, action=argparse.BooleanOptionalAction)
 
     return parser.parse_args()
@@ -78,12 +79,19 @@ def main():
         
         file_name = args.FileName
         
+        today = args.Today
+        if today is None:
+            today = datetime.now().date()
+            print("No custom date specified - using today ({0}) as end date".format(today))
+        else:
+            today = datetime.strptime(args.Today, "%Y-%m-%d").date()
+            print("Custom Date for Today specified - using {0} as end date".format(today))
+        
         history = try_parse_int(args.History)
         if history:
             print("Use rolling history of the last {0} days".format(history))
         else:
             history_start = datetime.strptime(args.History, "%Y-%m-%d").date()
-            today = datetime.today().date()
             history = (today - history_start).days
             print("Using history with fixed start date {0} - History is {1} days".format(history_start, history))
         
@@ -94,13 +102,13 @@ def main():
         
         remaining_items = int(args.RemainingItems)
         
-        target_date = (datetime.now() + timedelta(days=14)).date()
+        target_date = (today + timedelta(days=14))
         
         if args.TargetDate:        
             target_date = datetime.strptime(args.TargetDate, args.TargetDateFormat).date()
     
         csv_service = CsvService()
-        monte_carlo_service = MonteCarloService(history, args.SaveCharts)
+        monte_carlo_service = MonteCarloService(history, today, args.SaveCharts)
 
         print_logo()
         
@@ -116,6 +124,7 @@ def main():
         print("DateFormat: {0}".format(date_format))
         print("TargetDate: {0}".format(target_date))
         print("History: {0}".format(history))        
+        print("Today: {0}".format(today))        
         print("Save Charts: {0}".format(args.SaveCharts))
         print("----------------------------------------------------------------")
                 
@@ -123,7 +132,7 @@ def main():
             print("No csv file specified - generating example file with random values")
             file_name = os.path.join(os.getcwd(), "ExampleFile.csv")
             if not check_if_file_exists(file_name):
-                csv_service.write_example_file(file_name, delimiter, closed_date_column, history, date_format)
+                csv_service.write_example_file(file_name, delimiter, closed_date_column, history, date_format, today)
             
 
         closed_items_history = get_closed_items_history(csv_service, monte_carlo_service, file_name, delimiter, closed_date_column, date_format)        
