@@ -2,6 +2,9 @@ import argparse
 from datetime import datetime, timedelta
 import os
 
+import requests
+from importlib.metadata import version
+
 from .MonteCarloService import MonteCarloService
 from .CsvService import CsvService
 
@@ -50,6 +53,25 @@ def check_if_file_exists(file_path, raise_if_not_found = False):
     
     return True
 
+def check_for_updates(package_name):
+    try:
+        current_version = version(package_name)
+
+        # Query PyPI for the latest version
+        response = requests.get(f"https://pypi.org/pypi/{package_name}/json")
+        response.raise_for_status()
+        latest_version = response.json()["info"]["version"]
+
+        # Compare versions
+        if current_version != latest_version:
+            print("------- Update Available -----------")
+            print(f"Update available: {latest_version} (current: {current_version})")
+            print(f"Run the following command to upgrade: 'python -m pip install --upgrade {package_name}'")
+            print("------- Update Available -----------")
+
+    except Exception:
+        print("Error checking for updates - ignoring")
+
 def main():    
     try:
         args = parse_arguments()
@@ -82,8 +104,11 @@ def main():
 
         print_logo()
         
+        package_name = "montecarlocsv"
+        current_version = version(package_name)
+        
         print("================================================================")
-        print("Starting montecarlocsv with following Parameters")
+        print("Starting {0}@{1} with following Parameters".format(package_name, current_version))
         print("================================================================")  
         print("FileName: {0}".format(file_name))
         print("Delimiter: {0}".format(delimiter))
@@ -142,7 +167,9 @@ def main():
             
             
         print()
-        print()
+        
+        check_for_updates(package_name)
+        
         print()
         print("🛈 Want to learn more about how all of this works? Check out out website! 🛈")
         print("🔗 https://letpeople.work 🔗")
