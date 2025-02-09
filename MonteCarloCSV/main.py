@@ -2,9 +2,6 @@ import argparse
 from datetime import datetime, timedelta
 import os
 
-import requests
-from importlib.metadata import version
-
 from .MonteCarloService import MonteCarloService
 from .CsvService import CsvService
 
@@ -53,25 +50,6 @@ def check_if_file_exists(file_path, raise_if_not_found = False):
         return False
     
     return True
-
-def check_for_updates(package_name):
-    try:
-        current_version = version(package_name)
-
-        # Query PyPI for the latest version
-        response = requests.get(f"https://pypi.org/pypi/{package_name}/json")
-        response.raise_for_status()
-        latest_version = response.json()["info"]["version"]
-
-        # Compare versions
-        if current_version != latest_version:
-            print("------- Update Available -----------")
-            print(f"Update available: {latest_version} (current: {current_version})")
-            print(f"Run the following command to upgrade: 'python -m pip install --upgrade {package_name}'")
-            print("------- Update Available -----------")
-
-    except Exception:
-        print("Error checking for updates - ignoring")
 
 def main():    
     try:
@@ -177,11 +155,11 @@ def main():
             
         print()
         
-        check_for_updates(package_name)
-        
-        print()
-        print("🛈 Want to learn more about how all of this works? Check out out website! 🛈")
-        print("🔗 https://letpeople.work 🔗")
+        print("================================================================")
+        print("MonteCarloCSV is deprecated and will not receive any further updates.")
+        print("Please consider using FlowPulse which supports CSV files as well as Jira and Azure DevOps.")
+        print("You can find more details at https://letpeople.work#flowpulse")
+        print("================================================================")
         
     except Exception as exception:
         print("Error while executing montecarloscsv:")

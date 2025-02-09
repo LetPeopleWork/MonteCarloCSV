@@ -2,6 +2,9 @@
 ![CI Workflow](https://github.com/letpeoplework/montecarlocsv/actions/workflows/publish.yml/badge.svg)
 ![PyPI - Downloads](https://img.shields.io/pypi/dm/montecarlocsv)
 
+# ⚠️ DEPRECATED - This project is no longer maintained
+**MonteCarloCSV is no longer updated. Please switch to [FlowPulse](https://github.com/letpeoplework/flowpulse) instead, which supports the same functionality.**
+
 ## Introduction
 
 This python package allows you to run a Monte Carlo Simulation (MCS) offline using a standard csv file as an input. Using this tool, any organisation can harness the power of MCS without relying on SaaS products or third-party tools.
